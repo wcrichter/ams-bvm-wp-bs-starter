@@ -20,6 +20,19 @@
 <?php wp_head(); ?>
 </head>
 
+<?php
+  $custom_page_templates = array(
+    'template-home.php',
+    'template-about.php',
+    'template-book.php',
+    'template-assessment.php',
+    'template-assessment-results.php',
+    'template-media.php',
+    'template-contact.php'
+    //Add or edit custom templates here to remove the #content, .container and .row divs.
+  )
+?>
+
 <body <?php body_class(); ?>>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wp-bootstrap-starter' ); ?></a>
@@ -83,7 +96,9 @@
             </div>
         </div>
     <?php endif; ?>
+  <?php if(!is_page_template($custom_page_templates)): ?> <!--Removes #content, .container and .row divs from custom page templates-->
 	<div id="content" class="site-content">
 		<div class="container">
 			<div class="row">
+  <?php endif; ?>
                 <?php endif; ?>
