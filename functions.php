@@ -270,3 +270,30 @@ require get_template_directory() . '/inc/plugin-compatibility/plugin-compatibili
 if ( ! class_exists( 'wp_bootstrap_navwalker' )) {
     require_once(get_template_directory() . '/inc/wp_bootstrap_navwalker.php');
 }
+
+if( function_exists('acf_add_options_page') ) {
+	// add parent
+	$parent = acf_add_options_page(array(
+		'page_title' 	=> 'Theme General Settings',
+		'menu_title' 	=> 'Theme Settings',
+		'redirect' 		=> false
+	));
+	// add sub page
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Contact Settings',
+		'menu_title' 	=> 'Contact',
+		'parent_slug' 	=> $parent['menu_slug'],
+	));
+	// add sub page
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Social Settings',
+		'menu_title' 	=> 'Social',
+		'parent_slug' 	=> $parent['menu_slug'],
+	));
+}
+
+// Gravity Forms anchor - disable auto scrolling of forms
+add_filter("gform_confirmation_anchor", create_function("","return false;"));
+
+// Start Gravity Forms progress bar at zero
+add_filter( 'gform_progressbar_start_at_zero', '__return_true' );
